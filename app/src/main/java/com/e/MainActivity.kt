@@ -89,20 +89,17 @@ fun MainScreen() {
 fun Navigation(navController: NavHostController) {
     NavHost(navController, startDestination = NavDrawerItem.Home.route) {
         composable(NavDrawerItem.Home.route) {
-            Log.e("my", "---> Home Screen")
             HomeScreen()
         }
         composable(NavDrawerItem.Report.route) {
             ReportScreen()
         }
         composable(NavDrawerItem.Materials.route) {
-            Log.e("my", "---> Materials Screen")
             MaterialsScreen()
         }
         composable(NavDrawerItem.Time.route) {
         }
         composable(NavDrawerItem.Notification.route) {
-            Log.e("my", "---> Notification Screen")
             NotificationScreen()
         }
         composable(NavDrawerItem.Settings.route) {
