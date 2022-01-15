@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.e">
+    package="com.amicum">
 
     <application
-        android:name=".di.MainApp"
+        android:name="com.amicum.di.MainApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AmicumCompose"
         tools:ignore="AllowBackup">
         <activity
-            android:name=".MainActivity"
+            android:name="com.amicum.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AmicumCompose.NoActionBar">
