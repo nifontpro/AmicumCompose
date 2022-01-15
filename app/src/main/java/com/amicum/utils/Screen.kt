@@ -5,5 +5,5 @@ sealed class Screen(val route: String) {
 }
 
 object Arg {
-    const val comment = "comment"
+    const val comment = "com"
 }

@@ -1,15 +1,17 @@
 package com.amicum
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.amicum.home.presentation.HomeScreen
 import com.amicum.materials.presentation.MaterialsScreen
 import com.amicum.notification.presentation.NotificationScreen
@@ -22,6 +24,7 @@ import com.amicum.utils.NavDrawerItem
 import com.amicum.utils.Screen
 import dagger.hilt.android.AndroidEntryPoint
 
+@ExperimentalComposeUiApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,15 +39,22 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalComposeUiApi
 @Composable
 fun MainScreen() {
     val navController = rememberNavController()
     NavHost(navController, startDestination = NavDrawerItem.Home.route) {
 
         // Drawer Menu:
-        composable(NavDrawerItem.Home.route) { entry ->
+        composable(NavDrawerItem.Home.route,
+        arguments = listOf(
+            navArgument(Arg.comment) {
+                type = NavType.StringType
+                defaultValue = null
+                nullable = true
+            }
+        )) { entry ->
             val comment = entry.arguments?.getString(Arg.comment)
-            Log.e("my", "---> $comment")
             HomeScreen(navController, comment)
         }
         composable(NavDrawerItem.Report.route) {

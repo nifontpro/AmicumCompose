@@ -19,10 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.amicum.R
-import com.amicum.utils.Drawer
-import com.amicum.utils.NavDrawerItem
-import com.amicum.utils.Screen
-import com.amicum.utils.TopBarOther
+import com.amicum.utils.*
 import kotlinx.coroutines.launch
 
 @Composable
@@ -33,6 +30,9 @@ fun HomeScreen(navController: NavHostController, comment: String?) {
     LaunchedEffect(key1 = comment) {
         comment?.let {
             scaffoldState.snackbarHostState.showSnackbar(comment)
+            navController.currentBackStackEntry?.arguments?.putString(
+                Arg.comment, null
+            )
         }
     }
 
