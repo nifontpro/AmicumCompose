@@ -3,6 +3,7 @@ package com.amicum
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
@@ -23,12 +24,24 @@ import com.amicum.utils.Arg
 import com.amicum.utils.NavDrawerItem
 import com.amicum.utils.Screen
 import dagger.hilt.android.AndroidEntryPoint
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+
 
 @ExperimentalComposeUiApi
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
+
+    private val viewModel: MainViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        installSplashScreen().apply {
+            setKeepOnScreenCondition{
+                viewModel.isLoading.value
+            }
+        }
+
         setContent {
             AmicumComposeTheme {
                 Surface(color = MaterialTheme.colors.background) {
@@ -47,13 +60,13 @@ fun MainScreen() {
 
         // Drawer Menu:
         composable(NavDrawerItem.Home.route,
-        arguments = listOf(
-            navArgument(Arg.comment) {
-                type = NavType.StringType
-                defaultValue = null
-                nullable = true
-            }
-        )) { entry ->
+            arguments = listOf(
+                navArgument(Arg.comment) {
+                    type = NavType.StringType
+                    defaultValue = null
+                    nullable = true
+                }
+            )) { entry ->
             val comment = entry.arguments?.getString(Arg.comment)
             HomeScreen(navController, comment)
         }
