@@ -1,4 +1,4 @@
-package com.e.ui.theme
+package com.amicum.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

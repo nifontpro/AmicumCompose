@@ -1,4 +1,4 @@
-package com.e
+package com.amicum
 
 import org.junit.Test
 
