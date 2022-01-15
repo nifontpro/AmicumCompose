@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">AmicumCompose</string>
+    <string name="sCheckTime">Учет простоев</string>
+    <string name="sReport">Отчеты</string>
+    <string name="sMaterials">Материалы</string>
+    <string name="sDevelopedByAmicum">Разработано Amicum</string>
+    <string name="sComment">Комменетарий</string>
 </resources>

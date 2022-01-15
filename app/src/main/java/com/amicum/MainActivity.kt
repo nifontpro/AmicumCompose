@@ -1,6 +1,7 @@
 package com.amicum
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.MaterialTheme
@@ -13,8 +14,12 @@ import com.amicum.home.presentation.HomeScreen
 import com.amicum.materials.presentation.MaterialsScreen
 import com.amicum.notification.presentation.NotificationScreen
 import com.amicum.report.presentation.ReportScreen
+import com.amicum.test_work.presentation.TestWorkScreen
+import com.amicum.time.presentation.TimeScreen
 import com.amicum.ui.theme.AmicumComposeTheme
+import com.amicum.utils.Arg
 import com.amicum.utils.NavDrawerItem
+import com.amicum.utils.Screen
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,21 +40,31 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     val navController = rememberNavController()
     NavHost(navController, startDestination = NavDrawerItem.Home.route) {
-        composable(NavDrawerItem.Home.route) {
-            HomeScreen(navController)
+
+        // Drawer Menu:
+        composable(NavDrawerItem.Home.route) { entry ->
+            val comment = entry.arguments?.getString(Arg.comment)
+            Log.e("my", "---> $comment")
+            HomeScreen(navController, comment)
         }
         composable(NavDrawerItem.Report.route) {
-            ReportScreen()
+            ReportScreen(navController)
         }
         composable(NavDrawerItem.Materials.route) {
-            MaterialsScreen()
+            MaterialsScreen(navController)
         }
         composable(NavDrawerItem.Time.route) {
+            TimeScreen(navController)
         }
         composable(NavDrawerItem.Notification.route) {
-            NotificationScreen()
+            NotificationScreen(navController)
         }
         composable(NavDrawerItem.Settings.route) {
+        }
+
+        // Other:
+        composable(Screen.TestWorkScreen.route) {
+            TestWorkScreen(navController)
         }
     }
 }

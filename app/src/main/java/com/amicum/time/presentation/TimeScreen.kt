@@ -1,4 +1,4 @@
-package com.amicum.materials.presentation
+package com.amicum.time.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,10 +17,10 @@ import com.amicum.R
 import com.amicum.utils.TopBar
 
 @Composable
-fun MaterialsScreen(navController: NavHostController) {
+fun TimeScreen(navController: NavHostController) {
     Scaffold(
         topBar = {
-            TopBar(header = stringResource(R.string.sMaterials)) {
+            TopBar(header = stringResource(R.string.sCheckTime)) {
                 navController.popBackStack()
             }
         },
@@ -31,7 +31,7 @@ fun MaterialsScreen(navController: NavHostController) {
                 .wrapContentSize(Alignment.Center)
         ) {
             Text(
-                text = stringResource(R.string.sMaterials),
+                text = stringResource(R.string.sCheckTime),
                 fontWeight = FontWeight.Bold,
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 textAlign = TextAlign.Center,

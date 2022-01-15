@@ -16,18 +16,18 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 
 @Composable
-fun TopBar(navController: NavController, header: String) {
+fun TopBar(header: String, onBack: () -> Unit) {
     Row(
         modifier = Modifier
+            .background(MaterialTheme.colors.primaryVariant)
             .fillMaxWidth()
-            .padding(start = 10.dp, top = 10.dp, bottom = 10.dp),
+            .padding(start = 10.dp, top = 5.dp, bottom = 5.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         IconButton(
-            onClick = { navController.popBackStack() },
+            onClick = onBack,
         ) {
             Icon(
                 imageVector = Icons.Default.ArrowBack, contentDescription = "Back",

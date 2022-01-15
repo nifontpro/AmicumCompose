@@ -4,44 +4,54 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.Card
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.amicum.notification.data.Notifications
 import com.amicum.ui.theme.DarkRed
+import com.amicum.utils.TopBar
 
 @Composable
-fun NotificationScreen() {
+fun NotificationScreen(navController: NavHostController) {
 
     val viewModel: NotificationViewModel = hiltViewModel()
     val notifications = viewModel.notifications.collectAsState().value
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .wrapContentSize(Alignment.Center)
-    ) {
-        LazyColumn(
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            item {
-                Text(
-                    "События",
-                    style = MaterialTheme.typography.h4,
-                    modifier = Modifier.padding(10.dp)
-                )
+    Scaffold(
+        topBar = {
+            TopBar(header = "Уведомления") {
+                navController.popBackStack()
             }
-            items(notifications) { item ->
-                NotificationCard(item)
+        },
+    ) {
+
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .wrapContentSize(Alignment.Center)
+        ) {
+            LazyColumn(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                item {
+                    Text(
+                        "События",
+                        style = MaterialTheme.typography.h4,
+                        modifier = Modifier.padding(10.dp)
+                    )
+                }
+                items(notifications) { item ->
+                    NotificationCard(item)
+                }
             }
         }
     }
@@ -94,5 +104,5 @@ private fun NotificationCard(item: Notifications) {
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    NotificationScreen()
+    NotificationScreen(rememberNavController())
 }
